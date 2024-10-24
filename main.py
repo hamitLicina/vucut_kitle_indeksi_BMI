@@ -6,7 +6,7 @@ window = tk.Tk()
 window.title("BMI (Vücut Kitle Endeksi) Hesaplayıcı")
 
 # Boy giriş etiketi ve alanı
-tk.Label(window, text="Boy (metre):").grid(row=0, column=0, padx=10, pady=10)
+tk.Label(window, text="Boy (metre ya da santimetre):").grid(row=0, column=0, padx=10, pady=10)
 entry_height = tk.Entry(window)
 entry_height.grid(row=0, column=1, padx=10, pady=10)
 
@@ -28,6 +28,10 @@ def calculate_bmi():
         height = float(entry_height.get())
         # Kiloyu al ve ondalıklı sayıya çevir
         weight = float(entry_weight.get())
+
+        # Boy 3'ten küçükse metre olarak hesapla, aksi takdirde santimetre olarak kabul et
+        if height > 3:
+            height = height / 100  # Santimetreyi metreye çeviriyoruz
 
         if height > 0 and weight > 0:
             bmi = weight / (height ** 2)  # BMI hesaplama
